@@ -18,6 +18,9 @@
     <ClInclude Include="..\src\fsm.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\demo\demo.h">
+      <Filter>demo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\demo\main.cpp">

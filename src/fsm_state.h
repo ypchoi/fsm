@@ -1,20 +1,37 @@
 ﻿#pragma once
 
 
-template <typename TType>
-class FsmState
+
+template <typename TStateType>
+class FsmState_t
 {
+    template <typename TStateType, typename TEventType>
+    friend class Fsm_t;
+
 public:
-    explicit FsmState(const TType& type)
+    explicit FsmState_t(const TStateType& type)
         : m_type(type)
     {
     }
 
-    TType GetType() const
+    virtual ~FsmState_t()
+    {
+    }
+
+    const TStateType& GetType() const
     {
         return m_type;
     }
 
-private:
-    TType m_type;
+protected:
+    virtual void OnEnter()
+    {
+    }
+
+    virtual void OnExit()
+    {
+    }
+
+protected:
+    TStateType m_type;
 };
