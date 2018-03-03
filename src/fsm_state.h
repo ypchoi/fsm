@@ -1,12 +1,16 @@
 ﻿#pragma once
+#include <functional>
 
 
 
-template <typename TStateType>
+template <typename TStateType, typename TEventType>
+class Fsm_t;
+
+template <typename TStateType, typename TEventType>
 class FsmState_t
 {
-    template <typename TStateType, typename TEventType>
-    friend class Fsm_t;
+    using TFsm = Fsm_t<TStateType, TEventType>;
+    friend class TFsm;
 
 public:
     explicit FsmState_t(const TStateType& type)
@@ -32,6 +36,13 @@ protected:
     {
     }
 
+    template <typename TEventType>
+    bool Trigger(const TEventType& event)
+    {
+        return m_trigger(event);
+    }
+
 protected:
     TStateType m_type;
+    std::function<bool(const TEventType&)> m_trigger;
 };

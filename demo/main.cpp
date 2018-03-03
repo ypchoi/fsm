@@ -6,12 +6,12 @@
 
 int main()
 {
-    using TFsm = Fsm_t<eDemoState, decltype(WalkEvent)>;
+    using TFsm = Fsm_t<eDemoState, TDemoEventType>;
 
     TFsm fsm;
     fsm.CreateState<DemoState>("idle", eDemoState::Idle);
     fsm.CreateState<DemoState>("walking", eDemoState::Walking);
-    fsm.CreateState<DemoState>("jumping", eDemoState::Jumping);
+    fsm.CreateState<DemoJumpState>();
 
     fsm.CreateTransition(eDemoState::Idle, WalkEvent, eDemoState::Walking);
     fsm.CreateTransition(eDemoState::Idle, JumpEvent, eDemoState::Jumping);
@@ -25,7 +25,7 @@ int main()
         bool working = true;
         while (working)
         {
-            cout << endl << "W:walk, J:jump, L:land, S:stop, Q:quit" << endl;
+            cout << endl << "W:walk, J:jump, S:stop, Q:quit" << endl;
 
             char c;
             cin >> c;
@@ -40,11 +40,6 @@ int main()
             case 'j':
             case 'J':
                 fsm.Trigger(JumpEvent);
-                break;
-
-            case 'l':
-            case 'L':
-                fsm.Trigger(LandEvent);
                 break;
 
             case 's':

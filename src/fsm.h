@@ -11,7 +11,7 @@
 template <typename TStateType, typename TEventType>
 class Fsm_t
 {
-    using TState = FsmState_t<TStateType>;
+    using TState = FsmState_t<TStateType, TEventType>;
     using TTransitionKey = FsmTransitionKey_t<TStateType, TEventType>;
     using TTransition = FsmTransition_t<TStateType, TEventType>;
 
@@ -34,6 +34,11 @@ public:
 
     bool AddState(std::unique_ptr<TState>&& state)
     {
+        state->m_trigger = [this](const TEventType& event) -> bool
+        {
+            return this->Trigger(event);
+        };
+
         TStateType type = state->GetType();
         return m_states.insert({ type, std::move(state) }).second;
     }
