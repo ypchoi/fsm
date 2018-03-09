@@ -23,17 +23,18 @@ class DemoState : public FsmState_t<eDemoState, TDemoEventType>
 {
 public:
     DemoState(const char* name, eDemoState state)
-        : FsmState_t(state)
-        , m_name(name)
+        : m_name(name), m_state(state)
     {
     }
 
 protected:
+    virtual const eDemoState& GetType() const override { return m_state; }
     virtual void OnEnter() override { std::cout << "+ Enter : " << m_name << std::endl; }
     virtual void OnExit() override { std::cout << "- Exit : " << m_name << std::endl; }
 
 private:
     std::string m_name;
+    eDemoState m_state;
 };
 
 class DemoJumpState : public DemoState

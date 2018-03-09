@@ -13,28 +13,14 @@ class FsmState_t
     friend class TFsm;
 
 public:
-    explicit FsmState_t(const TStateType& type)
-        : m_type(type)
-    {
-    }
+    explicit FsmState_t() {}
+    virtual ~FsmState_t() {}
 
-    virtual ~FsmState_t()
-    {
-    }
-
-    const TStateType& GetType() const
-    {
-        return m_type;
-    }
+    virtual const TStateType& GetType() const = 0;
 
 protected:
-    virtual void OnEnter()
-    {
-    }
-
-    virtual void OnExit()
-    {
-    }
+    virtual void OnEnter() {}
+    virtual void OnExit() {}
 
     template <typename TEventType>
     bool Trigger(const TEventType& event)
@@ -43,6 +29,5 @@ protected:
     }
 
 protected:
-    TStateType m_type;
     std::function<bool(const TEventType&)> m_trigger;
 };
