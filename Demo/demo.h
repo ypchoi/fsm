@@ -28,7 +28,7 @@ public:
     }
 
 protected:
-    virtual const eDemoState& GetType() const override { return m_state; }
+    virtual eDemoState GetType() const override { return m_state; }
     virtual void OnEnter() override { std::cout << "+ Enter : " << m_name << std::endl; }
     virtual void OnExit() override { std::cout << "- Exit : " << m_name << std::endl; }
 
