@@ -9,8 +9,7 @@ class Fsm_t;
 template <typename TStateType, typename TEventType>
 class FsmState_t
 {
-    using TFsm = Fsm_t<TStateType, TEventType>;
-    friend class TFsm;
+    friend class Fsm_t<TStateType, TEventType>;
 
 public:
     explicit FsmState_t() {}
@@ -22,7 +21,6 @@ protected:
     virtual void OnEnter() {}
     virtual void OnExit() {}
 
-    template <typename TEventType>
     bool Trigger(const TEventType& event)
     {
         return m_trigger(event);

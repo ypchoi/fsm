@@ -47,7 +47,7 @@ public:
 
     virtual void OnEnter() override
     {
-        __super::OnEnter();
+        DemoState::OnEnter();
 
         std::this_thread::sleep_for(std::chrono::seconds(1));
         Trigger(LandEvent);
