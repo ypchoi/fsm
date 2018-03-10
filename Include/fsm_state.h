@@ -16,7 +16,7 @@ public:
     explicit FsmState_t() {}
     virtual ~FsmState_t() {}
 
-    virtual const TStateType& GetType() const = 0;
+    virtual TStateType GetType() const = 0;
 
 protected:
     virtual void OnEnter() {}
