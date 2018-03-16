@@ -40,7 +40,7 @@ public:
         };
 
         TStateType type = state->GetType();
-        return m_states.insert({ type, std::move(state) }).second;
+        return m_states.emplace(std::make_pair(type, std::move(state))).second;
     }
 
     bool CreateTransition(const TStateType& from, const TEventType& event, const TStateType& to)
